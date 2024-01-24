@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -114,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const Padding(padding: EdgeInsets.symmetric(horizontal: 10.0)),
           if (isPlayerOneMarked) 
           Text(
-            "Player1: ${playerOne}",
+            "Player1: $playerOne",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -155,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const Padding(padding: EdgeInsets.symmetric(horizontal: 10.0)),
           if (isPlayerTwoMarked) 
           Text(
-            "Player2: ${playerTwo}",
+            "Player2: $playerTwo",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
