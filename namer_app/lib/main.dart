@@ -2,6 +2,8 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+const Color darkBlue = Color.fromARGB(255, 43, 18, 47);
+
 void main() {
   runApp(MyApp());
 }
@@ -15,9 +17,8 @@ class MyApp extends StatelessWidget {
       create: (context) => MyAppState(),
       child: MaterialApp(
         title: 'Namer App',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: darkBlue,
         ),
         home: MyHomePage(),
       ),
