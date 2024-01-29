@@ -2,15 +2,21 @@
 
 A new Flutter project.
 
-## Getting Started
+## 기능
 
-This project is a starting point for a Flutter application.
+- [ ] 등록 기능: 차량번호를 등록할 수 있다.
+- [ ] 요금 계산 기능: 주차 시간에 따라 주차 요금을 계산할 수 있다.
 
-A few resources to get you started if this is your first Flutter project:
+## 규칙
+- 낮 시간(9:00 - 20:00) 주차 요금은 첫 30분 5000원, 이후 10분당 2000원
+    - 9:00 - 10:00 주차 시, 5000 + 2000 * 3 = 11,000원
+- 밤 시간(20:01 - 9:00) 주 차 요금은 첫 30분 2000원, 이후 1시간당 5000원
+- 주차 24시간 동안 최대 50,000원 부과 가능하며 초과 불가능.
+    -9:00 - 다음 날 10:00
+        9:00 - 20:00 => 11시간 = 30분 + 630분 -> 5000원 + 63 * 2000원 ==> 131,000원
+        20:01 - 8:59 => 12시간 = 30분 + 690분 -> 2000원 + 57,500원 ==> 59,500원
+        9:00 - 10:00 => 1시간 = 30분 + 30분 -> 5000원 + 2000원 ==> 7,000원
+        = 197,500원 하지만 24시간에 최대 부여할 수 있는 주차 요금은 50,000원이므로 
+        9시부터 다음날 10시까지 24시간 동안 주차한다면 50,000원이다. 
+    
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
