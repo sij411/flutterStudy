@@ -1,16 +1,17 @@
 # asian_cups
 
-A new Flutter project.
+아시안컵 대진표 게임
 
-## Getting Started
+현재 진행중인 아시안컵과 같은 대진표를 만들고, 우승팀을 선정해 봅시다.
 
-This project is a starting point for a Flutter application.
+기본 상태는 8강전으로 고정합니다.
+상하로 맞붙은 팀이 대진 관계이며, 그 중 한 팀을 클릭하면 그 팀이 승자가 됩니다.
+한번 결정된 승자를 변경할 수 없습니다.
+대진 상대가 정해지지 않은 상태에서 승패를 판정할 수 없습니다.
 
-A few resources to get you started if this is your first Flutter project:
+문제 출처 : JJFlutterClass 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 신경 쓰임
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- InkWell
+- event : onTap
