@@ -72,15 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         label: quarterFinals[index],
                         onTap: () {
                           setState(() {
-                            print("선택된 팀: ${quarterFinals[index]}");
                             if (!semiFinals.contains(quarterFinals[index])) {
                               semiFinals[semiSelectOrder] =
                                   quarterFinals[index];
                               semiSelectOrder < 3
                                   ? semiSelectOrder++
                                   : semiSelectOrder;
-
-                              log(semiFinals[semiSelectOrder]);
                             }
                           });
                         },
@@ -109,7 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           label: finals[0],
                           onTap: () {
                             setState(() {
-                              winner = finals[0];
+                              if (winner.isEmpty) {
+                                winner = finals[0];
+                              }
                             });
                           }),
                     ],
@@ -120,7 +119,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           label: finals[1],
                           onTap: () {
                             setState(() {
-                              winner = finals[1];
+                              if (winner.isEmpty) {
+                                winner = finals[1];
+                              }
                             });
                           }),
                     ],
@@ -153,7 +154,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             semiSelectOrder < 3
                                 ? semiSelectOrder++
                                 : semiSelectOrder;
-                            log(semiFinals[semiSelectOrder]);
                           });
                         },
                       ),
