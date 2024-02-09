@@ -29,11 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
   int semiSelectOrder = 0;
   int finalSelectOrder = 0;
   final List<String> quarterFinals = [
-    "🇹🇯", // Indonesia
-    "🇯🇴", // Jordan
-    "🇦🇺", // Austrailia
-    "🇰🇷", // Korea
-    "🇯🇵", // Japan
+    "🇹🇯",
+    "🇯🇴",
+    "🇦🇺",
+    "🇰🇷",
+    "🇯🇵",
     "🇮🇷",
     "🇺🇿",
     "🇶🇦"
@@ -72,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         label: quarterFinals[index],
                         onTap: () {
                           setState(() {
+                            // 해당 국가가 포함되지 않았을 때만 실행
                             if (!semiFinals.contains(quarterFinals[index])) {
                               semiFinals[semiSelectOrder] =
                                   quarterFinals[index];
