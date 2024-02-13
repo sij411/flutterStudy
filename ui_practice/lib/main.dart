@@ -1,10 +1,6 @@
-import 'dart:ffi';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:ui_practice/widgets/button.dart';
-import 'package:ui_practice/widgets/currency_card.dart';
+import '/widgets/button.dart';
+import '/widgets/currency_card.dart';
 
 const Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
