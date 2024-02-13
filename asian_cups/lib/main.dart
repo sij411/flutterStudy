@@ -73,6 +73,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           setState(() {
                             // 해당 국가가 포함되지 않았을 때만 실행
+                            /* 솔루션 코드
+                            if (semiFinals[index ~/ 2].isNotEmpty) return;
+                          setState(() {
+                            semiFinals[index ~/ 2] = quarterFinals[index];
+                          });
+                            */
                             if (!semiFinals.contains(quarterFinals[index])) {
                               semiFinals[semiSelectOrder] =
                                   quarterFinals[index];
@@ -90,7 +96,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       2,
                       (index) => SquareItem(
                         label: semiFinals[index],
+                        /*
+                        if (finals[index ~/ 2].isNotEmpty ||
+                              semiFinals[index % 2 == 0 ? index + 1 : index - 1]
+                                  .isEmpty) return;
+                          setState(() {
+                            finals[index ~/ 2] = semiFinals[index];
+                          });
+                        */
                         onTap: () {
+                          print(index);
                           setState(() {
                             finals[finalSelectOrder] = semiFinals[index];
                             finalSelectOrder < 1
@@ -133,6 +148,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       (index) => SquareItem(
                         label: semiFinals[index + 2],
                         onTap: () {
+                          print(index);
+                          /*
+                          if (finals[(index + 2) ~/ 2].isNotEmpty ||
+                              semiFinals[index % 2 == 0 ? index + 3 : index + 1]
+                                  .isEmpty) return;
+                          setState(() {
+                            finals[(index + 2) ~/ 2] = semiFinals[index + 2];
+                          });
+                           */
                           setState(() {
                             finals[finalSelectOrder] = semiFinals[index + 2];
                             finalSelectOrder < 1
@@ -149,6 +173,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       (index) => SquareItem(
                         label: quarterFinals[index + 4],
                         onTap: () {
+                          /* 
+                          if (semiFinals[(index + 4) ~/ 2].isNotEmpty) return;
+                          setState(() {
+                            semiFinals[(index + 4) ~/ 2] =
+                                quarterFinals[index + 4];
+                          });
+                          */
+                          print(index);
                           setState(() {
                             semiFinals[semiSelectOrder] =
                                 quarterFinals[index + 4];
