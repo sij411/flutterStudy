@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movieflix/services/api_services.dart';
 
 import 'screens/home_screen.dart';
 
 void main() {
+  ApiService.getPopularMovies();
   runApp(const MyApp());
 }
 
