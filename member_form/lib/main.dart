@@ -34,18 +34,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _pwController = TextEditingController();
   Set<String> idList = {};
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void dispose() {
+    _idController.dispose();
+    super.dispose();
   }
 
   @override
@@ -70,13 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
             // 회원가입 폼
             Form(
                 key: _formKey,
@@ -100,45 +89,54 @@ class _MyHomePageState extends State<MyHomePage> {
                         return null;
                       },
                     ), // input : name
-                    const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
-                          "아이디",
-                        )),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: '아이디를 입력하세요',
-                      ),
-                      validator: (String? value) {
-                        if (value == null || idList.contains(value)) {
-                          return '해당 아이디는 이미 존재하는 아이디입니다.';
-                        }
-                        // TODO : 중복체크 버튼 만들어서 validate
-                        idList.add(value);
-                        return null;
-                      },
-                    ), // input : id
+                    Column(
+                      children: [
+                        TextFormField(
+                          controller: _idController,
+                          decoration: const InputDecoration(
+                            hintText: "IDd를 입력하세요",
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: ElevatedButton(
+                            child: const Text('중복 확인'),
+                            onPressed: () {
+                              if (idList.contains(_idController.text)) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return const AlertDialog(
+                                        content: Text(
+                                            "이미 존재하는 ID입니다. \n 다른 아이디를 입력해주세요."),
+                                      );
+                                    });
+                              }
+                            },
+                          ),
+                        )
+                      ],
+                    ),
                     const Padding(
                         padding: EdgeInsets.symmetric(vertical: 10.0),
                         child: Text(
                           "비밀번호",
                         )),
-                        TextFormField(
+                    TextFormField(
                       decoration: const InputDecoration(
                         hintText: '영문과 숫자를 포함한 8자 이상의 비밀번호를 입력하세요',
                       ),
-                      
                     ), // input : password
                     const Padding(
                         padding: EdgeInsets.symmetric(vertical: 10.0),
                         child: Text(
                           "비밀번호 확인",
                         )),
-                        TextFormField(
+                    TextFormField(
                       decoration: const InputDecoration(
                         hintText: '같은 비밀번호를 한번 더 입력해주세요',
                       ),
-                      validator: (value) => ,
+
                       // TODO : 기존에 입력한 비밀번호와 대조하기 (보안성 지키면서)
                     ), // 비밀번호 확인
                     Padding(
@@ -157,11 +155,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
