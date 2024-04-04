@@ -36,6 +36,9 @@ class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
+
+  final onlyAlphabet = RegExp(r'^[a-zA-Z]+$');
+  final onlyNumeric = RegExp(r'^[0-9]+$');
   Set<String> idList = {};
 
   @override
@@ -94,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         TextFormField(
                           controller: _idController,
                           decoration: const InputDecoration(
-                            hintText: "IDd를 입력하세요",
+                            hintText: "ID를 입력하세요",
                           ),
                         ),
                         Padding(
@@ -108,7 +111,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                     builder: (context) {
                                       return const AlertDialog(
                                         content: Text(
-                                            "이미 존재하는 ID입니다. \n 다른 아이디를 입력해주세요."),
+                                            "이미 존재하는 ID입니다. 다른 아이디를 입력해주세요."),
+                                      );
+                                    });
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return const AlertDialog(
+                                        content: Text("사용 가능합니다."),
                                       );
                                     });
                               }
@@ -123,9 +134,20 @@ class _MyHomePageState extends State<MyHomePage> {
                           "비밀번호",
                         )),
                     TextFormField(
+                      controller: _pwController,
+                      obscureText: true,
                       decoration: const InputDecoration(
                         hintText: '영문과 숫자를 포함한 8자 이상의 비밀번호를 입력하세요',
                       ),
+                      validator: (String? value) {
+                        if (value == null ||
+                            value.length < 8 ||
+                            onlyAlphabet.hasMatch(value) ||
+                            onlyNumeric.hasMatch(value)) {
+                          return '영문과 숫자를 포함한 8자 이상의 비밀번호를 입력하세요';
+                        }
+                        return null;
+                      },
                     ), // input : password
                     const Padding(
                         padding: EdgeInsets.symmetric(vertical: 10.0),
@@ -133,12 +155,18 @@ class _MyHomePageState extends State<MyHomePage> {
                           "비밀번호 확인",
                         )),
                     TextFormField(
+                      obscureText: true,
                       decoration: const InputDecoration(
-                        hintText: '같은 비밀번호를 한번 더 입력해주세요',
+                        hintText: '같은 비밀번호를 한번 더 입력해주세요',
                       ),
-
-                      // TODO : 기존에 입력한 비밀번호와 대조하기 (보안성 지키면서)
-                    ), // 비밀번호 확인
+                      validator: (String? value) {
+                        if (value == null || value != _pwController.text) {
+                          return "다른 비밀번호를 입력하셨습니다. 다시 한번 입력해주세요.";
+                        }
+                        return null;
+                      },
+                    ),
+                    // 비밀번호 확인
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: ElevatedButton(
