@@ -34,11 +34,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
 
   final onlyAlphabet = RegExp(r'^[a-zA-Z]+$');
   final onlyNumeric = RegExp(r'^[0-9]+$');
+  final onlyKoreanAlphabets = RegExp('[가-힣]+');
+
   Set<String> idList = {};
 
   @override
@@ -74,28 +77,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
-                          "이름",
-                        )),
                     TextFormField(
+                      controller: _nameController,
                       decoration: const InputDecoration(
                         hintText: '이름을 입력하세요',
                       ),
                       validator: (String? value) {
                         if (value == null ||
                             value.length < 2 ||
-                            value.length > 5) {
+                            value.length > 5 ||
+                            !onlyKoreanAlphabets.hasMatch(value)) {
                           return '이름은 2글자 이상 4글자 이하의 한글이어야 합니다.';
                         }
                         return null;
                       },
+                      keyboardType: TextInputType.name,
                     ), // input : name
                     Column(
                       children: [
                         TextFormField(
                           controller: _idController,
+                          validator: (String? value) {
+                            if (idList.contains(_idController.text)) {
+                              return "이미 존재하는 ID입니다.";
+                            }
+                            idList.add(_idController.text);
+                            return null;
+                          },
                           decoration: const InputDecoration(
                             hintText: "ID를 입력하세요",
                           ),
@@ -128,11 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         )
                       ],
                     ),
-                    const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
-                          "비밀번호",
-                        )),
+
                     TextFormField(
                       controller: _pwController,
                       obscureText: true,
@@ -148,12 +152,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         }
                         return null;
                       },
+                      textInputAction: TextInputAction.next,
                     ), // input : password
-                    const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
-                          "비밀번호 확인",
-                        )),
+
                     TextFormField(
                       obscureText: true,
                       decoration: const InputDecoration(
@@ -165,6 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         }
                         return null;
                       },
+                      textInputAction: TextInputAction.next,
                     ),
                     // 비밀번호 확인
                     Padding(
