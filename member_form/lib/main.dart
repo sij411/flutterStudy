@@ -92,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         return null;
                       },
                       keyboardType: TextInputType.name,
+                      autocorrect: false,
                     ), // input : name
                     Column(
                       children: [
@@ -107,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           decoration: const InputDecoration(
                             hintText: "ID를 입력하세요",
                           ),
+                          autocorrect: false,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -153,6 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         return null;
                       },
                       textInputAction: TextInputAction.next,
+                      autocorrect: false,
                     ), // input : password
 
                     TextFormField(
@@ -167,6 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         return null;
                       },
                       textInputAction: TextInputAction.next,
+                      autocorrect: false,
                     ),
                     // 비밀번호 확인
                     Padding(
