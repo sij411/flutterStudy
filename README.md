@@ -8,6 +8,6 @@
 - daily_fortune_teller : 버튼을 누르면 오늘의 운세와 이미지를 확인할 수 있는 프로그램
   - 이미지와 텍스트는 chatGPT 4.0을 이용하여 생성하였습니다.
 - parking_registartion_app : 주차시간에 맞는 요금을 계산하는 프로그램
-  - 구현 진행 중 1.30 ~
+  
  
   
